@@ -1,0 +1,26 @@
+BOSS MISSION: SQL vs NoSQL Justification
+Author: [Lê Đức Hùng]
+
+-------------------------------------------------------
+SCENARIO 1: High-velocity Social Media Feed
+-------------------------------------------------------
+CHOICE: NoSQL (e.g., MongoDB, Cassandra, DynamoDB)
+
+JUSTIFICATION:
+1. Scalability (Horizontal): Social media feeds generate massive amounts of data (posts, likes, logs) per second. NoSQL databases are designed to scale out (sharding) across multiple cheap servers much easier than SQL databases, which typically scale vertically (bigger, expensive hardware).
+
+2. Schema Flexibility: Social media features change constantly (adding reactions, stickers, new media types). A document-based NoSQL store allows us to save unstructured or semi-structured data (JSON) without performing expensive `ALTER TABLE` operations that could lock a massive SQL table.
+
+3. Write Speed vs. Consistency: In a social feed, if a "Like" count is off by 1 for a few milliseconds (Eventual Consistency), it's acceptable. NoSQL prioritizes high write throughput and availability (CAP theorem) over the strict ACID consistency required by banks.
+
+-------------------------------------------------------
+SCENARIO 2: Secure Bank Ledger
+-------------------------------------------------------
+CHOICE: SQL (Relational DB e.g., PostgreSQL, MySQL, Oracle)
+
+JUSTIFICATION:
+1. ACID Compliance (Data Integrity): Banking transactions (transferring money from A to B) must be Atomic. If the system crashes after deducting money from A but before adding it to B, the transaction must roll back completely. SQL databases strictly enforce ACID properties to prevent data corruption.
+
+2. Strict Constraints: A bank ledger requires rigid rules. Constraints like FOREIGN KEY (ensuring an account exists before transfer), CHECK (balance cannot be negative), and data types (DECIMAL for money) are native and strictly enforced in SQL, preventing "bad data" from ever entering the system.
+
+3. Complex Queries (Joins): Banking often requires complex reporting (JOINING customers, accounts, transaction logs, and branch info). SQL is optimized for these deep relationships. NoSQL often requires "denormalization" (duplicating data), which creates a nightmare for maintaining accurate financial records.
