@@ -1,6 +1,6 @@
 # Session 06: Database Design
 
-**Student:**[Điền Tên Của Bạn]
+**Student:**[Lê Đức Hùng]
 **Course:** INS3064 - Multimedia Design & Web Development
 
 ---
